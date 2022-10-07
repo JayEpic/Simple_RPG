@@ -5,13 +5,13 @@ public class keyHandler implements KeyListener {
     public boolean upPressed, downPressed, leftPressed, rightPressed;
     
     // Override
-    public void keyTyped(KeyEvent o) {
-        // TODO Auto-generated method stub
+    public void keyTyped(KeyEvent e) {
+
     }
 
     // Override
-    public void keyPressed(KeyEvent o) {
-         int code = o.getKeyCode();
+    public void keyPressed(KeyEvent e) {
+         int code = e.getKeyCode();
 
          if (code == KeyEvent.VK_Z) {
             upPressed = true;
@@ -31,8 +31,8 @@ public class keyHandler implements KeyListener {
     }
 
     // Override
-    public void keyReleased(KeyEvent o) {
-        int code = o.getKeyCode();
+    public void keyReleased(KeyEvent e) {
+        int code = e.getKeyCode();
 
         if (code == KeyEvent.VK_Z) {
             upPressed = false;
