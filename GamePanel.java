@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
-public class gamePanel extends JPanel implements Runnable {
+public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16; // 16x16 tile
     final int scale = 3;
 
@@ -17,7 +17,7 @@ public class gamePanel extends JPanel implements Runnable {
     // FPS
     int FPS = 60;
 
-    keyHandler keyH = new keyHandler();
+    KeyHandler KeyH = new KeyHandler();
     Thread gameThread;
 
     // Set player's default position
@@ -25,11 +25,11 @@ public class gamePanel extends JPanel implements Runnable {
     int playerY = 100;
     int playerSpeed = 4;
 
-    public gamePanel() {
+    public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
-        this.addKeyListener(keyH);
+        this.addKeyListener(KeyH);
         this.setFocusable(true);
     }
 
@@ -42,48 +42,41 @@ public class gamePanel extends JPanel implements Runnable {
     public void run() {
 
         double drawInterval = 1000000000 / FPS; // 0.01666 seconds
-        double nextDrawTime = System.nanoTime() + drawInterval;
+        double delta = 0;
+        long lastTime = System.nanoTime();
+        long currentTime;
 
         while (gameThread != null) {
+            
+            currentTime = System.nanoTime();
 
-            // 1 UPDATE : update information such as charactetr position
-            update();
+            delta += (currentTime - lastTime) / drawInterval;
 
-            // 2 DRAW : draw the screen with the updated information
-            repaint();
+            lastTime = currentTime;
 
-            try {
-                double remainingTime = nextDrawTime - System.nanoTime();
-                remainingTime = remainingTime / 1000000;
-
-                if (remainingTime < 0) {
-                    remainingTime = 0;
-                }
-                Thread.sleep((long) remainingTime);
-
-                nextDrawTime += drawInterval;
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if (delta >= 1) {
+                update();
+                repaint();
+                delta--;
             }
         }
     }
 
     public void update() {
 
-        if (keyH.upPressed == true) {
+        if (KeyH.upPressed == true) {
             playerY -= playerSpeed;
         }
 
-        else if (keyH.downPressed == true) {
+        else if (KeyH.downPressed == true) {
             playerY += playerSpeed;
         }
 
-        else if (keyH.leftPressed == true) {
+        else if (KeyH.leftPressed == true) {
             playerX -= playerSpeed;
         }
 
-        else if (keyH.rightPressed == true) {
+        else if (KeyH.rightPressed == true) {
             playerX += playerSpeed;
         }
     }

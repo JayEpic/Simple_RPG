@@ -7,12 +7,14 @@ public class RPGGame {
         window.setResizable(false);
         window.setTitle("RPG Game");
 
-        gamePanel gamePanel = new gamePanel();
+        GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
 
         window.pack();
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+
+        gamePanel.startGameThread();
     }
 }
