@@ -4,8 +4,10 @@ import main.GamePanel;
 import main.KeyHandler;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
@@ -29,14 +31,14 @@ public class Player extends Entity {
     }
     public void getPlayerImage() {
         try {
-            down1 = ImageIO.read(getClass().getResourceAsStream("/res/player/char_walk_down1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/res/player/char_walk_down2.png"));
-            up1 = ImageIO.read(getClass().getResourceAsStream("/res/player/char_walk_down1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/res/player/char_walk_down2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/res/player/char_walk_down1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/res/player/char_walk_down2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/res/player/char_walk_down1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/res/player/char_walk_down2.png"));
+            down1 = ImageIO.read(new FileInputStream("res/player/char_walk_down1.png"));
+            down2 = ImageIO.read(new FileInputStream("res/player/char_walk_down2.png"));
+            up1 = ImageIO.read(new FileInputStream("res/player/char_walk_down1.png"));
+            up2 = ImageIO.read(new FileInputStream("res/player/char_walk_down2.png"));
+            left1 = ImageIO.read(new FileInputStream("res/player/char_walk_down1.png"));
+            left2 = ImageIO.read(new FileInputStream("res/player/char_walk_down2.png"));
+            right1 = ImageIO.read(new FileInputStream("res/player/char_walk_down1.png"));
+            right2 = ImageIO.read(new FileInputStream("res/player/char_walk_down2.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
