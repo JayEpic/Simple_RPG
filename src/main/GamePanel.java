@@ -1,12 +1,13 @@
-package main;
+package src.main;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
-import entity.Player;
-import tile.TileManager;
+import src.entity.Player;
+import src.tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16; // 16x16 tile
@@ -55,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
         long currentTime;
 
         while (gameThread != null) {
-            
+
             currentTime = System.nanoTime();
 
             delta += (currentTime - lastTime) / drawInterval;

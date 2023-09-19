@@ -1,4 +1,4 @@
-package tile;
+package src.tile;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,10 +9,10 @@ import javax.imageio.ImageIO;
 
 import java.awt.Graphics2D;
 
-import main.GamePanel;
+import src.main.GamePanel;
 
 public class TileManager {
-    
+
     GamePanel gp;
     public Tile[] tile;
     public int mapTileNum[][];
@@ -50,7 +50,7 @@ public class TileManager {
             tile[5] = new Tile();
             tile[5].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/earth_tile.png"));
 
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -75,7 +75,7 @@ public class TileManager {
                     col++;
                 }
 
-                if(col == gp.maxWorldCol) {
+                if (col == gp.maxWorldCol) {
                     col = 0;
                     row++;
                 }
@@ -91,7 +91,7 @@ public class TileManager {
         int worldCol = 0;
         int worldRow = 0;
 
-        while(worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
+        while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
             int tileNum = mapTileNum[worldCol][worldRow];
 
             int worldX = worldCol * gp.tileSize;
@@ -100,11 +100,11 @@ public class TileManager {
             int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
             if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
-                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
-                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-                    g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-                }
+                    worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
+                    worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
+                    worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+                g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            }
 
             worldCol++;
 

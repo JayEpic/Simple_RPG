@@ -1,4 +1,5 @@
-package main;
+package src.main;
+
 import javax.swing.JFrame;
 
 public class RPGGame {
