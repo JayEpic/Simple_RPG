@@ -1,12 +1,14 @@
 package src.entity;
 
-import src.main.GamePanel;
-import src.main.KeyHandler;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.io.FileInputStream;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
+
+import src.main.GamePanel;
+import src.main.KeyHandler;
 
 import java.awt.image.BufferedImage;
 
@@ -28,6 +30,8 @@ public class Player extends Entity {
         solidArea = new Rectangle();
         solidArea.x = 8;
         solidArea.y = 16;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
         solidArea.width = 32;
         solidArea.height = 32;
 
@@ -79,8 +83,13 @@ public class Player extends Entity {
                 direction = "right";
             }
 
+            // Check tile collision
             collisionOn = false;
             gp.cChecker.checkTile(this);
+
+            // Check object collision
+            int objIndex = gp.cChecker.checkObject(this, true);
+            // pickUpObject(objIndex);
 
             // If collision is false, player can move
             if (collisionOn == false) {
@@ -115,6 +124,12 @@ public class Player extends Entity {
             }
         }
     }
+
+    // public void pickUpObject(int i) {
+    // if (i != 999) {
+    // gp.obj[i] = null;
+    // }
+    // }
 
     public void draw(Graphics2D g2) {
         // g2.setColor(Color.white);

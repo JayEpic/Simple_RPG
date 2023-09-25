@@ -7,9 +7,9 @@ import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 
-import java.awt.Graphics2D;
-
 import src.main.GamePanel;
+
+import java.awt.Graphics2D;
 
 public class TileManager {
 
