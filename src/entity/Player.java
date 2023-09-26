@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 import src.main.GamePanel;
 import src.main.KeyHandler;
+import src.main.UtilityTool;
 
 import java.awt.image.BufferedImage;
 
@@ -47,23 +48,31 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
-        try {
-            down1 = ImageIO.read(new FileInputStream("res/player/char_walk_down1.png"));
-            down2 = ImageIO.read(new FileInputStream("res/player/char_normal.png"));
-            down3 = ImageIO.read(new FileInputStream("res/player/char_walk_down2.png"));
-            up1 = ImageIO.read(new FileInputStream("res/player/char_walk_up1.png"));
-            up2 = ImageIO.read(new FileInputStream("res/player/char_normal_up.png"));
-            up3 = ImageIO.read(new FileInputStream("res/player/char_walk_up2.png"));
-            left1 = ImageIO.read(new FileInputStream("res/player/char_walk_left1.png"));
-            left2 = ImageIO.read(new FileInputStream("res/player/char_normal_left.png"));
-            left3 = ImageIO.read(new FileInputStream("res/player/char_walk_left2.png"));
-            right1 = ImageIO.read(new FileInputStream("res/player/char_walk_right1.png"));
-            right2 = ImageIO.read(new FileInputStream("res/player/char_normal_right.png"));
-            right3 = ImageIO.read(new FileInputStream("res/player/char_walk_right2.png"));
+        down1 = setup("char_walk_down1");
+        down2 = setup("char_normal");
+        down3 = setup("char_walk_down2");
+        up1 = setup("char_walk_up1");
+        up2 = setup("char_normal_up");
+        up3 = setup("char_walk_up2");
+        left1 = setup("char_walk_left1");
+        left2 = setup("char_normal_left");
+        left3 = setup("char_walk_left2");
+        right1 = setup("char_walk_right1");
+        right2 = setup("char_normal_right");
+        right3 = setup("char_walk_right2");
+    }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+    public BufferedImage setup(String ImageName) {
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try {
+            image = ImageIO.read(new FileInputStream("res/player/" + ImageName + ".png"));
+            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+        } catch (Exception e) {
+            // TODO: handle exception
         }
+        return image;
     }
 
     public void update() {
@@ -125,11 +134,26 @@ public class Player extends Entity {
         }
     }
 
-    // public void pickUpObject(int i) {
-    // if (i != 999) {
-    // gp.obj[i] = null;
-    // }
-    // }
+    public void pickUpObject(int i) {
+        if (i != 999) {
+
+            String objectName = gp.obj[i].name;
+
+            switch (objectName) {
+                // case "Chest":
+                // if (KeyH.enterPressed == true) {
+                // try {
+                // gp.obj[i].image = ImageIO
+                // .read(getClass().getResourceAsStream("/res/objects/chestOpened.png"));
+                // } catch (IOException e) {
+                // e.printStackTrace();
+                // }
+                // }
+                // KeyH.enterPressed = false;
+                // break;
+            }
+        }
+    }
 
     public void draw(Graphics2D g2) {
         // g2.setColor(Color.white);
@@ -196,6 +220,6 @@ public class Player extends Entity {
                 }
                 break;
         }
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY, null);
     }
 }
